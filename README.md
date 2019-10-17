@@ -1,2 +1,2 @@
 # Searching-Algorithms
-General Searching Algos!
+All Searching algorithms implemented in python.
