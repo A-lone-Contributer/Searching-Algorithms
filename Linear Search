@@ -1,0 +1,26 @@
+# LINEAR SEARCH
+
+# Linear search is the most basic searching algorithms out there.It simply does a
+# sequential search for the element till the element is found.
+
+# Linear search is not widely used because of presence of more efficient algorithms.
+
+def linear_search(arr, n, key):
+    # loop through the whole list
+    for i in range(0, n):
+        # if the current element is the key then element is found
+        if arr[i] == key:
+            print(f"Element present as index {i}")
+        else:
+            # else Not found
+            print("Element not found!")
+
+
+# Driver code
+arr = [2, 3, 34, 56, 12]
+n = len(arr)
+key = input("Enter the value you want to search: ")
+linear_search(arr, n, key)
+
+# Time Complexity: O(N)
+# Space Complexity : O(1)
