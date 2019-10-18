@@ -1,0 +1,58 @@
+# BINARY SEARCH
+
+# Search a sorted array by repeatedly dividing the search interval in half.
+# It works on Subtract and conquer strategy.
+
+# NOTE: The array must be sorted beforehand
+
+# High level Algorithm:
+
+# 1.Begin with an interval covering the whole array.
+# 2.If the value of the search key is less than the item in the middle of the interval,
+#  narrow the interval to the lower half. Otherwise narrow it to the upper half.
+# 3.Repeatedly check until the value is found or the interval is empty.
+
+# There can be two ways to implement binary search. One is iterative and other is
+# recursive. The one discussed below is recursive.
+
+
+def binary_search(arr, start, end, key):
+    # computing the index of middle element
+    while end >= 1:
+        mid = (start + end) // 2
+
+        # If element to be searched is the middle element
+        if arr[mid] == key:
+            return mid
+
+        # If element is smaller than mid, then it
+        # can only be present in left sub-array so update the start and
+        # end according to that
+        elif arr[mid] > key:
+            # recursive call
+            return binary_search(arr, start, end - 1, key)
+
+        # Else the element can only be present
+        # in right sub-array so update the start and end according to that
+        else:
+            # recursive call
+            return binary_search(arr, start + 1, end, key)
+    # if not present then simply return -1
+    return -1
+
+
+# Driver code
+arr = [2, 3, 5, 13, 34, 56]
+# Element to be searched
+key = 13
+
+# Function call
+result = binary_search(arr, 0, len(arr) - 1, key)
+
+if result != -1:
+    print(f"Element is present at index : {result}")
+else:
+    print("Element is not present in array")
+
+# Space Complexity : O(log(n))
+# Time Complexity : O(1)
