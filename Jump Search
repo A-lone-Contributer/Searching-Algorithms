@@ -55,7 +55,7 @@ if result == -1:
 else:
     print(f"Element found at index : {result}")
 
-# Time Complexity : O(n/m -(m-1))
+# Time Complexity : O(n/m + (m-1))
 # here m is the number of elements in the slot
 # m(optimum)= sqrt(n)
 
