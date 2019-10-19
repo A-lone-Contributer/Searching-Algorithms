@@ -1,0 +1,62 @@
+# JUMP SEARCH
+
+# NOTE : Works only for sorted arrays
+
+# The basic idea is to check fewer elements (than linear search) by jumping
+# ahead by fixed steps or skipping some elements in place of searching all elements.
+
+
+# It is faster than linear search but slower than binary search
+# The optimum size for jump is sqrt(n) which comes out by minimising the time complexity.
+
+from math import sqrt
+
+
+def jump_search(arr, n, key):
+    
+    # left index of array
+    left = 0
+    # right index of block
+    right = int(sqrt(n))
+
+    # if the key is greater than the current jump slot and right index has not
+    # exceeded the length of array
+    while arr[right] <= key and right < n:
+        # update the left with the value of last slot's right index
+        left = right
+        # and set the right of the current slot by root n
+        right += int(sqrt(n))
+        # there can be a condition where the slots are not even so right must contain a valid
+        # element at the that point
+        if right > n - 1:
+            # so we set right to the last element in that case
+            right = n
+
+    # if the correct slot is found then linear search it for the key
+    for i in range(left, right):
+        if arr[i] == key:
+            return i
+
+    # if the element is not present return -1
+    return -1
+
+
+# Driver Code
+arr = [2, 5, 13, 34, 56, 78, 100]
+n = len(arr)
+# element to be searched
+key = 13
+
+# call to jump_search
+result = jump_search(arr, n, key)
+
+if result == -1:
+    print("Element not found!")
+else:
+    print(f"Element found at index : {result}")
+
+# Time Complexity : O(n/m -(m-1))
+# here m is the number of elements in the slot
+# m(optimum)= sqrt(n)
+
+# Space Complexity : O(1)
