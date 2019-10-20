@@ -1,0 +1,68 @@
+# INTERPOLATION SEARCH
+
+# We know that binary search runs in O(log(n)) by checking for the middle
+# element. There is a scope for improvement here thus interpolation search comes
+# into picture. Interpolation search uses a probe formula to find a position.
+# The idea of formula is to return higher value of pos when element to be searched is closer
+# to arr[high] and smaller value when closer to arr[low]
+
+
+def interpolation_search(arr, n, key):
+    # Index of lower bound of arr
+    low = 0
+
+    # Index of higher bound of arr
+    high = n - 1
+
+    # check for the element till we found a match keeping the constraints in mind
+    # i.e low and high should not exceed and key should not exceed arr[low] and arr[high]
+    while (low <= high) and (key >= arr[low]) and (key <= arr[high]):
+
+        # if low is equal to high
+        if low == high:
+
+            # check if element at low is the element we are searching
+            if arr[low] == key:
+                # if yes return index
+                return low
+
+            # else element not found
+            return -1
+
+        # formula for probe
+        pos = low + int((float(low - high) / (arr[low] - arr[high]) * (key - arr[low])))
+
+        # if element is at pos
+        if arr[pos] == key:
+
+            # return index where element is found
+            return pos
+
+        # else is key is greater than the arr[pos] the make lower index to be pos+1
+        elif arr[pos] < key:
+            low = pos + 1
+
+        # else make high pos-1
+        else:
+            high = pos - 1
+            
+    return -1
+
+
+# Driver code
+arr = [1, 4, 7, 12, 24, 56]
+n = len(arr)
+# Element to be searched
+key = 12
+
+result = interpolation_search(arr, n, key)
+
+if result == -1:
+    print("Element not present!")
+else:
+    print(f"Element found at index : {result}")
+
+# Time Complexity : O(log(log(n))) (best and average)
+#                   O(n) (worst case)
+# Space Complexity : O(1)
+#
