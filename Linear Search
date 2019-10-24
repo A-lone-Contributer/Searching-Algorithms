@@ -6,13 +6,18 @@
 # Linear search is not widely used because of presence of more efficient algorithms.
 
 def linear_search(arr, n, key):
+
     # loop through the whole list
     for i in range(0, n):
+    
         # if the current element is the key then element is found
         if arr[i] == key:
+        
             print(f"Element present as index {i}")
+            
         else:
-            # else Not found
+        
+            # if not found
             print("Element not found!")
 
 
@@ -22,5 +27,5 @@ n = len(arr)
 key = input("Enter the value you want to search: ")
 linear_search(arr, n, key)
 
-# Time Complexity: O(N)
+# Time Complexity: O(n)
 # Space Complexity : O(1)
