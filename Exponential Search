@@ -1,0 +1,101 @@
+# EXPONENTIAL SEARCH
+
+# This searching algorithm is a speed up over binary search.
+
+# NOTE : Works only on sorted arrays.
+
+# Algorithm :
+# Start from the first element and compare the last element with the key but increasing the interval
+# two times until the last element is not greater than the key.
+# Once we have the upper index now we need to find the lower index for the interval where key is
+# present. We do this by dividing the upper limit by 2. So interval would be i/2 to i.
+# Why i/2? because we could not find a greater value in previous iteration.
+
+# As not the left or right subarray but a certain interval (i/2 to i) search space is
+# is to be searched thus it is faster than binary search.
+
+# Binary search function
+def binary_search(arr, start, end, key):
+
+    while end >= 1:
+
+        # computing the index of middle element
+        mid = (start + end) // 2
+
+        # If element to be searched is the middle element
+        if arr[mid] == key:
+
+            # return middle element
+            return mid
+
+        # If element is smaller than mid, then it
+        # can only be present in left sub-array so update the start and
+        # end accordingly
+        elif arr[mid] > key:
+
+            # recursive call
+            return binary_search(arr, start, end - 1, key)
+
+        # Else the element might be present
+        # in right sub-array so update the start and end accordingly
+        else:
+
+            # recursive call
+            return binary_search(arr, start + 1, end, key)
+
+    # if not present then simply return -1
+    return -1
+
+
+# Function for exponential search
+def exponential_search(arr, start, end, key):
+
+    # if the first element is the key itself
+    if arr[0] == key:
+
+        # return the index
+        return 0
+
+    # if there are no elements
+    if start >= end:
+        # return -1
+        return -1
+
+    # start from the first index
+    i = 1
+
+    # while i is less than the length
+    while i < end - start:
+        # if the doesn't key exists in the search space
+        if arr[i] < key:
+
+            # increase the search space
+            i *= 2
+
+        else:
+
+            # if exists then break the loop
+            break
+
+    # Call binary search on the interval i/2 and i (discussed above)
+    return binary_search(arr, i // 2, i, key)
+
+
+# Driver code
+arr = [1, 4, 12, 23, 33, 45, 67, 78]
+
+# Element to be searched
+key = 67
+
+# Function call
+result = exponential_search(arr, 0, len(arr) - 1, key)
+
+if result == -1:
+    print("Element not found!")
+else:
+    print(f"Element found at index : {result}")
+
+
+# Space Complexity : O(log(n))
+# Time Complexity : O(1)
+# Inplace : Yes
