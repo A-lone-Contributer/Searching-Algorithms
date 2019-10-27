@@ -1,13 +1,14 @@
 # INTERPOLATION SEARCH
 
 # We know that binary search runs in O(log(n)) by checking for the middle
-# element. There is a scope for improvement here thus interpolation search comes
+# element. There is a scope for improvement so interpolation search comes
 # into picture. Interpolation search uses a probe formula to find a position.
 # The idea of formula is to return higher value of pos when element to be searched is closer
-# to arr[high] and smaller value when closer to arr[low]
+# to arr[high] and smaller value when closer to arr[low].
 
 
 def interpolation_search(arr, n, key):
+
     # Index of lower bound of arr
     low = 0
 
@@ -23,6 +24,7 @@ def interpolation_search(arr, n, key):
 
             # check if element at low is the element we are searching
             if arr[low] == key:
+            
                 # if yes return index
                 return low
 
@@ -62,7 +64,8 @@ if result == -1:
 else:
     print(f"Element found at index : {result}")
 
+
 # Time Complexity : O(log(log(n))) (best and average)
 #                   O(n) (worst case)
 # Space Complexity : O(1)
-#
+
