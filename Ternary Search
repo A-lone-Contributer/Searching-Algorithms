@@ -1,0 +1,77 @@
+# TERNARY SEARCH
+
+# Like linear search and binary search, ternary search is also a searching technique.
+# In binary search we divide the array into two parts while in ternary search it is divided into
+# three parts.
+
+# NOTE: Works only if the array is sorted
+
+# Ternary search, like binary search, is a divide-and-conquer algorithm.
+# In this search, after each iteration it neglects 1/3
+# part of the array and repeats the same operations on the remaining 2/3.
+
+def ternary_search(arr, start, end, key):
+
+    # if there is only one element in the array
+    if start==end:
+      return 0
+      
+    if end > start:
+
+        # calculate the first mid point
+        midFirst = start + (end - start) // 3
+
+        # calculate the second mid point
+        midSecond = end - (end - start) // 3
+
+        # if the key we are searching is the first mid point itself then
+        if arr[midFirst] == key:
+
+            # return the index of first mid point
+            return midFirst
+
+        # if the key we are searching is the second mid point itself then
+        if arr[midSecond] == key:
+            # return the index of second mid point
+            return midSecond
+
+        # if the key is greater than the first mid point then search the element
+        # to the left of first mid point
+        if arr[midFirst] > key:
+
+            # recursive call
+            return ternary_search(arr, start, midFirst - 1, key)
+
+        # if the key is greater than the second mid point then search the element
+        # to the right of second mid point
+        elif arr[midSecond] < key:
+
+            # recursive call
+            return ternary_search(arr, midSecond + 1, end, key)
+
+        else:
+
+            # else element is between first and second midpoint
+            return ternary_search(arr, midFirst + 1, midSecond - 1, key)
+
+    # element not found
+    return -1
+
+
+# Driver code
+arr = [1, 3, 7, 12, 17, 25, 34]
+
+# key to be searched
+key = 17
+
+result = ternary_search(arr, 0, len(arr) - 1, key)
+
+if result == -1:
+    print("Element Not Found!")
+else:
+    print(f"Element Found at Index : {result}")
+
+
+# Time Complexity : O(log(n))
+# Space Complexity : O(1)
+# Inplace : Yes
