@@ -8,12 +8,12 @@
 
 # Algorithm:
 # Find the fibonacci greater than or equal to n.
-# While there are elements to be inspected- compare the
-# key with last element of range covered by (m-2)th fib number
-# if x matches then return else if x is greater then move one fib down and eliminate one-third of array
-# else if x is less then move two fib down and eliminate two-third of the array.
+# While there are elements to be inspected:
+# Compare the key with last element of range covered by (m-2)th fibonacci number
+# if x matches then return else if key is greater then move one fib down and eliminate one-third of array
+# else if key is less then move two fib down and eliminate two-third of the array.
 # Since there might be a single element remaining for comparison, check if (m-1)th fib number
-# is 1. If Yes, compare x with that remaining element. If match, return index.
+# is 1. If Yes, compare key with that remaining element. If match, return index.
 
 
 from math import sqrt
@@ -72,7 +72,8 @@ def fibonacci_search(arr, n, key):
 # Driver Code
 arr = [10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100]
 n = len(arr)
-result = fibonacci_search(arr, n, 50)
+key = 50
+result = fibonacci_search(arr, n, key)
 if result == -1:
     print("Element not found!")
 else:
