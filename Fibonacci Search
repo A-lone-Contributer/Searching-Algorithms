@@ -1,1 +1,83 @@
-to be implemented
+# FIBONACCI SEARCH
+
+# Fibonacci Search is similar to Binary Search in a way that is works on Sorted arrays
+# and uses Divide and Conquer paradigm but it doesn't divide the array into two parts rather it
+# eliminated either one-third or two-third of the array.
+# This algorithm is efficient as compared to binary search that it uses '+' and '-' for dividing in contrast to
+# binary search which uses '/' (costly).
+
+# Algorithm:
+# Find the fibonacci greater than or equal to n.
+# While there are elements to be inspected- compare the
+# key with last element of range covered by (m-2)th fib number
+# if x matches then return else if x is greater then move one fib down and eliminate one-third of array
+# else if x is less then move two fib down and eliminate two-third of the array.
+# Since there might be a single element remaining for comparison, check if (m-1)th fib number
+# is 1. If Yes, compare x with that remaining element. If match, return index.
+
+
+from math import sqrt
+
+# Utility Function to generate Fibonacci numbers
+def fibonacci_gen(n):
+    phi = (1 + sqrt(5)) / 2
+    return round(pow(phi, n) / sqrt(5))
+
+
+# Fibonacci Search code
+def fibonacci_search(arr, n, key):
+
+    # find the smallest Fibonacci number greater than or equal
+    # to the length of arr
+    m = 0
+    while fibonacci_gen(m) < n:
+        m += 1
+
+    # offset is the length of array eliminated from the start
+    offset = -1
+
+    # till there are number to be inspected
+    while fibonacci_gen(m) > 1:
+
+        # check if generated (m-2)th fib number is a valid index
+        i = min(offset + fibonacci_gen(m - 2), n)
+
+        # if the key to be searched is greater then
+        if key > arr[i]:
+
+            # move one down eliminating one-third of array
+            m -= 1
+
+            # update the offset
+            offset = i
+
+        # else if the key is smaller then move the pointer two down
+        # eliminating two-third of the array
+        elif key < arr[i]:
+            m -= 2
+
+        else:
+
+            # element found so return the index
+            return i
+
+    # if there is one element left to compare
+    if fibonacci_gen(m - 1) and arr[offset + 1] == key:
+        return offset + 1
+
+    # element not found
+    return -1
+
+
+# Driver Code
+arr = [10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100]
+n = len(arr)
+result = fibonacci_search(arr, n, 50)
+if result == -1:
+    print("Element not found!")
+else:
+    print(f"Element found at index {result}")
+
+
+# Time Complexity : O(log(n))
+# Space Complexity : O(1)
