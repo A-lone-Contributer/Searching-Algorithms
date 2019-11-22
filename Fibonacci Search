@@ -62,7 +62,16 @@ def fibonacci_search(arr, n, key):
             return i
 
     # if there is one element left to compare
-    if fibonacci_gen(m - 1) and arr[offset + 1] == key:
+    # Explanation:
+    # If we have a single element array in hand. Now, this array
+    # cannot be partitioned into two parts as one element can be present in
+    # only one partition. We will not enter any of the 2 while loops. We haven't inspected
+    # the only element in partition i.e (m-1)th fib .Thus we check if fib(m-1) and arr[offset+1]==x.
+    # Since offset is the index of the last element in the part (from the front) that we
+    # have eliminated, offset+1 will always represent the first element of the
+    # larger partition. Since we have only one element in the larger partition, offset+1 will 
+    # always be the index of that element. Also offset+1 <= n-1 handles the condition if the array element is out of bounds
+    if fibonacci_gen(m - 1) and offset+1 < n+1 and arr[offset + 1] == key:
         return offset + 1
 
     # element not found
@@ -72,7 +81,7 @@ def fibonacci_search(arr, n, key):
 # Driver Code
 arr = [10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100]
 n = len(arr)
-key = 50
+key = 101
 result = fibonacci_search(arr, n, key)
 if result == -1:
     print("Element not found!")
