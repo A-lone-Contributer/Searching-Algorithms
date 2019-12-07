@@ -7,9 +7,9 @@
 # binary search which uses '/' (costly).
 
 # Algorithm:
-# Find the fibonacci greater than or equal to n.
+# Find the fibonacci number greater than or equal to n.
 # While there are elements to be inspected:
-# Compare the key with last element of range covered by (m-2)th fibonacci number
+# Compare the key with last element of range covered by (m-2)th fibonacci number.
 # if x matches then return else if key is greater then move one fib down and eliminate one-third of array
 # else if key is less then move two fib down and eliminate two-third of the array.
 # Since there might be a single element remaining for comparison, check if (m-1)th fib number
